@@ -18,7 +18,7 @@ jobs:
       postgres:
         image: postgres:17
         ports:
-          - 5432:4321
+          - 4321:5432
         env:
           POSTGRES_USER: root 
           POSTGRES_PASSWORD: root
@@ -39,7 +39,7 @@ jobs:
     - name: Install Golang Migrate
       run: |
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.1/migrate.linux-arm64.tar.gz | tar xvz
-        sudo mv migrate.linux-arm64 /usr/local/bin/migrate
+        sudo mv migrate /usr/local/bin/migrate
         which migrate
       
 
