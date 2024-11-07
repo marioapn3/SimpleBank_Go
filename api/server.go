@@ -41,6 +41,10 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 func (server *Server) setupRouter() {
 	router := gin.Default()
 
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(200, "Welcome to simplebank api!")
+	})
+
 	router.POST("/users", server.createUser)
 	router.POST("/users/login", server.loginUser)
 
