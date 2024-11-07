@@ -1,0 +1,21 @@
+services:
+  postgres:
+    container_name: db_postgres
+    image: postgres:17.0-alpine
+    env_file: .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+  api :
+    build : 
+      context : .
+      dockerfile : Dockerfile 
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    environment:
+      - DB_SOURCE=postgresql://${DB_USER}:${DB_PASSWORD}@db_postgres:${DB_PORT}/${DB_NAME}?sslmode=disable
+    depends_on:
+      - postgres
+    entrypoint: ["/app/wait-for.sh", "db_postgres:${DB_PORT}", "--", "/app/start.sh"]
+    command: ["/app/main"]
