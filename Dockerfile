@@ -15,6 +15,7 @@ COPY db/migration ./migration
 COPY start.sh .
 COPY wait-for.sh .
 COPY app.env .
+COPY .env .
 
 RUN chmod +x start.sh wait-for.sh
      
