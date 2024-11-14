@@ -19,7 +19,6 @@ type Server struct {
 }
 
 func NewServer(config util.Config, store db.Store) (*Server, error) {
-	// using paseto token maker
 	tokenMaker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
 
 	// using jwt token maker
